@@ -1,3 +1,4 @@
+const fs   = require("node:fs")
 const http = require("node:http");
 const port = 3000;
 
@@ -15,8 +16,15 @@ const server = http.createServer((req, res) => {
     res.write("<h1>Ini Adalah Halaman Contact</h1>");
     res.end()
   } else {
-    res.write("Hallo World");
-    res.end();
+    fs.readFile('./index.html', (err,data) => {
+      if(err) {
+        res.writeHead(404);
+        res.write("Error: file not found");
+      } else {
+        res.write(data);
+      }
+      res.end();
+    });
   }
 
 });
