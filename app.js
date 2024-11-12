@@ -24,16 +24,22 @@ const server = http.createServer((req, res) => {
   })
 
   const url = req.url;
-  if(url == '/about') {
-    renderHTML('./about.html', res)
-  } else if (url == '/contact') {
-    renderHTML('./contact.html', res)
-  } else {
-    renderHTML('./index.html', res);
+
+  switch(url) {
+    case '/about':
+      renderHTML('./about.html', res);
+      break;
+    case '/contact':
+      renderHTML('./contact.html', res);
+      break;
+    default:
+      renderHTML('./index.html', res);
+      break;
   }
 
 });
 
+// menjalankan server
 server.listen(port, () => {
   console.log(`Server is listening on port ${port}..`);
 })
